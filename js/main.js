@@ -1,13 +1,16 @@
 window.addEventListener('load', init);
 
+getWords();
+
 const levels = {
     easy: 5,
     medium: 3,
     hard: 2
 }
 
-const currentLevel = levels.easy;
 
+let words = [];
+const currentLevel = levels.easy;
 let time = currentLevel;
 let score = 0;
 let isPlaying;
@@ -21,29 +24,17 @@ const timeDisplay = document.querySelector('#time');
 const message = document.querySelector('#message');
 const seconds = document.querySelector('#seconds');
 
-const words = [
-    'banana',
-    'tomate',
-    'caneca',
-    'documento',
-    'garrafa',
-    'abacate',
-    'holofote',
-    'impressora',
-    'computador',
-    'notebook',
-    'roteador',
-    'apartamento',
-    'alface',
-    'carro',
-    'cortina',
-    'chinelo',
-    'teclado',
-    'chocolate'
-];
+// Fetch words from an api
+async function getWords() {
+    const response = await fetch('https://api.noopschallenge.com/wordbot?count=100');
+    const data = await response.json();
+    return data.words;
+}
+
 
 //Inicio jogo
-function init() {
+async function init() {
+    words = await getWords();
     seconds.innerHTML = currentLevel;
     //carrega palavra do array
     showWord(words);
@@ -82,7 +73,7 @@ function matchWords() {
     }
 }
 
-//escolhe palavra aleatória
+//escolhe palavra aleatória / choose random word
 
 function showWord(words) {
     const randIndex = Math.floor(Math.random() * words.length);
