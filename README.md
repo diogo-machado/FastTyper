@@ -5,4 +5,4 @@ Possiveis melhorias:
 
 - salvar os melhores resultados
 - ranking das melhores pontuações
-  <s>- Uso de alguma API para assim obter um maior número de palavras</s>
+- <s>Uso de alguma API para assim obter um maior número de palavras</s>
